@@ -1,18 +1,19 @@
 import React from "react";
-import AdminSidebar from "../../components/admin/AdminSidebar";
-import AdminHeader from "../../components/admin/AdminHeader";
-import AdminFooter from "../../components/admin/AdminFooter";
-import "../../styles/admin.scss";
+import AdminHeader from "@/components/admin/AdminHeader";
+// import AdminSidebar from "@/components/admin/AdminSidebar";
+import Dock from "@/components/Dock/Dock";
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="flex min-h-screen admin-layout-container">
-      <AdminSidebar />
-      <main className="flex flex-col flex-1 admin-main-content">
+    <div className="flex h-screen bg-gray-100">
+      {/* <AdminSidebar /> */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader />
-        <div className="flex-1 p-4 admin-content-area">{children}</div>
-        <AdminFooter />
-      </main>
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 mt-16">
+          {children}
+        </main>
+        <Dock />
+      </div>
     </div>
   );
 }

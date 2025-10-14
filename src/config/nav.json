@@ -1,0 +1,55 @@
+{
+    "dockColor": "#f5f5f5",
+    "items": [
+        {
+            "name": "Dashboard",
+            "link": "/admin",
+            "icon": "LayoutDashboard",
+            "color": "#4ade80"
+        },
+        {
+            "name": "Content",
+            "link": "/admin/content",
+            "icon": "FileText",
+            "color": "#eab308",
+            "subItems": [
+                {
+                    "name": "Posts",
+                    "link": "/admin/content/posts",
+                    "icon": "FileEdit",
+                    "color": "#eab308"
+                },
+                {
+                    "name": "Pages",
+                    "link": "/admin/content/pages",
+                    "icon": "FileStack",
+                    "color": "#eab308"
+                }
+            ]
+        },
+        {
+            "name": "Analytics",
+            "link": "/admin/analytics",
+            "icon": "BarChart",
+            "color": "#f97316"
+        },
+        {
+            "name": "Reviews",
+            "link": "/admin/reviews",
+            "icon": "Star",
+            "color": "#60a5fa"
+        },
+        {
+            "name": "Inbox",
+            "link": "/admin/inbox",
+            "icon": "Mail",
+            "color": "#a855f7"
+        },
+        {
+            "name": "Logout",
+            "link": "/",
+            "icon": "LogOut",
+            "color": "#ef4444"
+        }
+    ]
+}

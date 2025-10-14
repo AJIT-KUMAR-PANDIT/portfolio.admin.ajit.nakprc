@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaHome,
   FaFileAlt,
@@ -15,7 +16,14 @@ export default function AdminSidebar() {
   return (
     <div className="admin-sidebar w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
       <div className="sidebar-header text-white text-2xl font-semibold uppercase">
-        Codinglab
+        <Image
+          src="/ajitkumarpandit/AJITKUMARPANDIT_LOGO.png"
+          alt="Ajit Kumar Pandit Logo"
+          width={150}
+          height={150}
+          layout="responsive"
+          objectFit="contain"
+        />
       </div>
       <nav className="sidebar-nav">
         <ul>

@@ -5,7 +5,8 @@ import Link from "next/link";
 import * as LucideIcons from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import axios from "axios";
+import navData from "../../config/nav.json";
+import { useSession } from "../SessionProvider";
 
 import styles from "./Dock.module.scss";
 
@@ -15,25 +16,11 @@ export default function Dock() {
   const [openSubMenu, setOpenSubMenu] = useState(null);
   const [dockSubMenu, setDockSubMenu] = useState(null);
   const [maxVisible, setMaxVisible] = useState(7);
-  const [navData, setNavData] = useState({ items: [] }); // Initialize with an empty items array
   const [mounted, setMounted] = useState(false);
 
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const { logout } = useSession();
 
-  // Fetch navigation data
-  useEffect(() => {
-    const fetchNavData = async () => {
-      try {
-        const response = await axios.get("/api/nav");
-        setNavData(response.data);
-      } catch (error) {
-        console.error("Error fetching navigation data:", error);
-      }
-    };
-    fetchNavData();
-  }, []);
-
-  // Responsive max visible
   useEffect(() => {
     const updateMax = () => {
       if (window.innerWidth < 640) setMaxVisible(3);
@@ -45,7 +32,6 @@ export default function Dock() {
     return () => window.removeEventListener("resize", updateMax);
   }, []);
 
-  // Close overlay click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (overlayRef.current && e.target === overlayRef.current) setOpen(false);
@@ -54,7 +40,6 @@ export default function Dock() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
 
   const handleDockSubMenuClick = (item) => {
@@ -65,6 +50,27 @@ export default function Dock() {
     const Icon = LucideIcons[item.icon] || LucideIcons.Circle;
     const circleClass = size === "large" ? "large" : "";
     const textClass = size === "large" ? "large" : "";
+
+    if (item.name === "Logout") {
+      return (
+        <button
+          key={i}
+          onClick={logout}
+          className={styles["dock-item"]}
+        >
+          <div
+            className={`${styles.circle} ${circleClass}`}
+            style={{
+              backgroundColor: item.color || "#e5e7eb",
+              borderRadius: "50%",
+            }}
+          >
+            <Icon className={circleClass} />
+          </div>
+          <span className={textClass}>{item.name}</span>
+        </button>
+      );
+    }
 
     if (item.subItems) {
       return (
@@ -140,7 +146,6 @@ export default function Dock() {
           )}
         </AnimatePresence>
 
-        {/* Hidden items */}
         {hiddenItems.length > 0 && (
           <button
             onClick={() => {
@@ -156,7 +161,6 @@ export default function Dock() {
           </button>
         )}
 
-        {/* Theme toggle */}
         <button
           onClick={() => {
             if (theme === "light") setTheme("dark");
@@ -180,7 +184,6 @@ export default function Dock() {
         </button>
       </section>
 
-      {/* Fullscreen overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
