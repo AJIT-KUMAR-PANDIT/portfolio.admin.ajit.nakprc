@@ -84,7 +84,7 @@ $transition-duration: 0.2s;
   box-shadow: $shadow;
   backdrop-filter: blur(8px);
   color: #1f2937;
-  z-index: 50;
+  z-index: 10;
   @include dockitems();
 
   &:hover {
