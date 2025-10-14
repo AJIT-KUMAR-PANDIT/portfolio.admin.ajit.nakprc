@@ -1,0 +1,164 @@
+@import "@/styles/laser.scss";
+
+$dock-bg-light: rgba(255, 255, 255, 0.8);
+$dock-bg-dark: rgba(31, 41, 55, 0.8);
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+$transition-duration: 0.2s;
+
+@mixin dockitems() {
+  &.dark {
+    background-color: $dock-bg-dark;
+    color: #e5e7eb;
+  }
+
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: transform $transition-duration;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      box-shadow: $shadow;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: #e5e7eb;
+
+      &.large {
+        width: 4rem;
+        height: 4rem;
+      }
+
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: #1f2937; // Default icon color for light mode
+
+        &.large {
+          width: 1.75rem;
+          height: 1.75rem;
+        }
+      }
+    }
+
+    &.dark {
+      .circle {
+        background-color: #374151; // Dark mode background for circle
+
+        svg {
+          color: #e5e7eb; // Dark mode icon color
+        }
+      }
+    }
+
+    span {
+      font-size: 0.625rem;
+
+      &.large {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.dock {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: $dock-bg-light;
+  box-shadow: $shadow;
+  backdrop-filter: blur(8px);
+  color: #1f2937;
+  z-index: 50;
+  @include dockitems();
+
+  &:hover {
+    @include laser-glow;
+    border-radius: 1.5rem;
+  }
+}
+
+.dock-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  color: white; // Default color for overlay content
+
+  @include dockitems();
+  .overlay-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+
+  .overlay-grid {
+    display: grid;
+    gap: 2rem;
+    padding: 1rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
+
+.dock-submenu {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: $shadow;
+  background-color: $dock-bg-light;
+  backdrop-filter: blur(8px);
+  color: #1f2937;
+
+  &.dark {
+    background-color: $dock-bg-dark;
+    color: #e5e7eb;
+  }
+
+  .submenu-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+
+  .submenu-items {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

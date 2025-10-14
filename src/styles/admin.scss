@@ -50,7 +50,7 @@
       margin-bottom: 0.5rem;
 
       a {
-      /* color: #333333; */
+        /* color: #333333; */
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -75,7 +75,7 @@
       margin-bottom: 1rem;
 
       a {
-      /* color: #333333; */
+        /* color: #333333; */
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -263,19 +263,22 @@
 
       &:nth-child(1) {
         background-color: #e0f2fe; /* Light blue */
-        .widget-icon, p {
+        .widget-icon,
+        p {
           color: #2196f3; /* Blue */
         }
       }
       &:nth-child(2) {
         background-color: #fffde7; /* Light yellow */
-        .widget-icon, p {
+        .widget-icon,
+        p {
           color: #ffeb3b; /* Yellow */
         }
       }
       &:nth-child(3) {
         background-color: #f3e5f5; /* Light purple */
-        .widget-icon, p {
+        .widget-icon,
+        p {
           color: #9c27b0; /* Purple */
         }
       }

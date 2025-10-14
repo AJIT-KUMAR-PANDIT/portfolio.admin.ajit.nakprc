@@ -1,0 +1,19 @@
+@mixin laser-glow {
+  // border laser
+
+  border: 2px solid #0ff; /* Optional border for a techy look */
+  animation: laser-glow 2s alternate; /* Animates the box-shadow */
+
+  @keyframes laser-glow {
+    0% {
+      box-shadow: 0 0 5px #0ff, /* cyan glow */ 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+    50% {
+      box-shadow: 0 0 10px #f0f, /* magenta glow */ 0 0 20px #f0f, 0 0 40px #f0f;
+    }
+    100% {
+      box-shadow: 0 0 5px #ff0, /* yellow glow */ 0 0 10px #ff0, 0 0 20px #ff0;
+    }
+  }
+  // ?laser end
+}
