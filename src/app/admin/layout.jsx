@@ -5,11 +5,11 @@ import Dock from "@/components/Dock/Dock";
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen ">
       {/* <AdminSidebar /> */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 mt-16">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto  p-4 mt-16">
           {children}
         </main>
         <Dock />
