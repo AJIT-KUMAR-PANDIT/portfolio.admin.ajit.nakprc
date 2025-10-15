@@ -1,0 +1,10 @@
+name = "admin.ajitkumarpandit"
+compatibility_date = "2025-10-15"
+
+type = "javascript" 
+
+[build]
+command = "npm install && npm run build"
+[build.upload]
+dir = ".next"       
+format = "service-worker"
