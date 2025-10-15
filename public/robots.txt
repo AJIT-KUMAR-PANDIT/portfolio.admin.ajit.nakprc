@@ -1,0 +1,7 @@
+# robots.txt for https://admin.ajitkumarpandit.nakprc.com
+
+User-agent: *
+Disallow: *
+Disallow: /
+Disallow: /admin/
+
