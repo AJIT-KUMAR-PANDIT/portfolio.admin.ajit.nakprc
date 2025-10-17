@@ -3,9 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "../styles/globals.scss";
 import "../styles/admin.scss";
-import { SessionProvider } from "../components/SessionProvider";
+import { SessionProvider } from "@/components/SessionProvider";
+import AuthGuard from "@/components/AuthGuard";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "next-themes";
+import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,9 @@ export default function RootLayout({ children }) {
     moun();
   }, []);
 
+  const pathname = usePathname();
+  const isPublicRoute = pathname === "/";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -34,11 +39,15 @@ export default function RootLayout({ children }) {
       >
         {mounted ? (
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <SessionProvider>{children}</SessionProvider>
+            <SessionProvider>
+              {isPublicRoute ? children : <AuthGuard>{children}</AuthGuard>}
+            </SessionProvider>
           </ThemeProvider>
         ) : (
           <div style={{ visibility: "hidden" }}>
-            <SessionProvider>{children}</SessionProvider>
+            <SessionProvider>
+              {isPublicRoute ? children : <AuthGuard>{children}</AuthGuard>}
+            </SessionProvider>
           </div>
         )}
       </body>
