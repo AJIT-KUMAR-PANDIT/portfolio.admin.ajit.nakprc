@@ -1,10 +1,8 @@
-"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "../styles/globals.scss";
 import "../styles/admin.scss";
 import { SessionProvider } from "../components/SessionProvider";
-import { useEffect, useState } from 'react';
 import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
@@ -18,26 +16,14 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {mounted ? (
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <SessionProvider>{children}</SessionProvider>
-          </ThemeProvider>
-        ) : (
-          <div style={{ visibility: "hidden" }}>
-            <SessionProvider>{children}</SessionProvider>
-          </div>
-        )}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SessionProvider>{children}</SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
