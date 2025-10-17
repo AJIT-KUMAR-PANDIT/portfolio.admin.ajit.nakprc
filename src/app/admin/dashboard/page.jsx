@@ -75,52 +75,11 @@ export default function Dashboard() {
       calculateStats(msgs);
     } catch (err) {
       console.error("Error fetching messages:", err);
-      // Use mock data for demonstration
-      const mockMessages = generateMockMessages();
-      setMessages(mockMessages);
-      calculateStats(mockMessages);
+      setMessages([]);
+      calculateStats([]);
     } finally {
       setLoading(false);
     }
-  };
-
-  const generateMockMessages = () => {
-    const names = [
-      "Sarah Johnson",
-      "Michael Chen",
-      "Emma Wilson",
-      "James Brown",
-      "Olivia Davis",
-      "William Garcia",
-      "Sophia Martinez",
-      "Lucas Anderson",
-    ];
-    const subjects = [
-      "Project Inquiry",
-      "Design Feedback",
-      "Meeting Request",
-      "Quote Request",
-      "Support Question",
-      "Partnership Proposal",
-      "General Inquiry",
-    ];
-    const mockData = [];
-
-    for (let i = 0; i < 50; i++) {
-      const daysAgo = Math.floor(Math.random() * 30);
-      const date = new Date();
-      date.setDate(date.getDate() - daysAgo);
-
-      mockData.push({
-        $id: `msg-${i}`,
-        name: names[Math.floor(Math.random() * names.length)],
-        emailAddress: `user${i}@example.com`,
-        subject: subjects[Math.floor(Math.random() * subjects.length)],
-        message: "This is a sample message content.",
-        $createdAt: date.toISOString(),
-      });
-    }
-    return mockData;
   };
 
   const calculateStats = (msgs) => {
